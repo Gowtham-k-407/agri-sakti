@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin Login — Agri-Sakthi</title>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+
+<body class="auth-bg">
+<div class="auth-card">
+  <h2>Admin Access</h2>
+  <h3>Restricted Login</h3>
+
+  <form id="adminForm">
+    <input name="phone" placeholder="Admin Phone" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <button class="btn btn-danger">Login as Admin</button>
+    <br>
+<a href="admin-register.html" class="admin-link">Request Admin Access</a>
+
+    <p id="adminMsg" class="msg"></p>
+  </form>
+
+  <a href="login.html" class="admin-link">Back to User Login</a>
+</div>
+
+<script>
+const API_BASE="http://localhost:3000/api";
+
+document.getElementById("adminForm").addEventListener("submit", async(e)=>{
+  e.preventDefault();
+  const payload = Object.fromEntries(new FormData(e.target));
+
+  try{
+    const res = await fetch(`${API_BASE}/auth/login`,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.message);
+    const decoded=JSON.parse(atob(data.token.split(".")[1]));
+
+    if(decoded.role!=="admin") throw new Error("Not an admin account");
+
+    localStorage.setItem("agri_token",data.token);
+    window.location.href="admin-dashboard.html";
+
+  }catch(err){
+    document.getElementById("adminMsg").innerText = err.message;
+  }
+});
+</script>
+</body>
+</html>

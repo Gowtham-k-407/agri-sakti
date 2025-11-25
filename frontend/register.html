@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Register — Agri-Sakthi</title>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+
+<body class="auth-bg">
+<div class="auth-card">
+  <h2>Create Account</h2>
+
+  <form id="registerForm">
+    <input name="name" placeholder="Name" required />
+    <input name="phone" placeholder="Phone Number" required />
+    <input name="password" type="password" placeholder="Password" required />
+
+    <select name="role" required>
+      <option value="farmer">Farmer</option>
+      <option value="buyer">Buyer</option>
+    </select>
+
+    <button class="btn">Register</button>
+    <p id="regMsg" class="msg"></p>
+  </form>
+
+  <a href="login.html" class="admin-link">Already have an account?</a>
+</div>
+
+<script>
+const API_BASE="http://localhost:3000/api";
+
+document.getElementById("registerForm").addEventListener("submit", async(e)=>{
+  e.preventDefault();
+  const payload = Object.fromEntries(new FormData(e.target));
+
+  try{
+    const res = await fetch(`${API_BASE}/auth/register`,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.message);
+    document.getElementById("regMsg").innerText="Registered! Redirecting...";
+
+    setTimeout(()=>window.location.href="login.html", 800);
+
+  }catch(err){
+    document.getElementById("regMsg").innerText=err.message;
+  }
+});
+</script>
+</body>
+</html>

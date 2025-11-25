@@ -1,0 +1,125 @@
+/* GLOBAL */
+body {
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(120deg,#1b1f24 20%, #2e7d32 70%);
+  color:white;
+}
+
+.page-bg { padding:20px; }
+.card {
+  background:#ffffff15;
+  backdrop-filter:blur(18px);
+  padding:18px;
+  border-radius:14px;
+  margin:12px 0;
+  box-shadow:0 0 10px #0004;
+}
+.topbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px;
+  background:#1b1f24aa;
+  border-radius:14px;
+}
+
+input, select {
+  width:100%;
+  padding:12px;
+  margin:6px 0;
+  border-radius:10px;
+  border:none;
+}
+
+.btn {
+  background:#2e7d32;
+  padding:10px 20px;
+  border:none;
+  border-radius:10px;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+}
+.btn:hover { background:#35a042; }
+
+.btn-buy {
+  background:#35d354;
+  border:none;
+  padding:8px 14px;
+  border-radius:10px;
+  cursor:pointer;
+}
+.btn-buy:hover { background:#2e9f47; }
+
+/* MODAL DRAWER */
+.modal {
+  position:fixed;
+  top:0; right:0;
+  width:350px;
+  height:100%;
+  background:#1b1f24ee;
+  backdrop-filter:blur(10px);
+  padding:25px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  justify-content:center;
+  box-shadow:-6px 0 12px #0005;
+  animation:slide .35s ease-out;
+}
+
+@keyframes slide {
+  from { transform:translateX(100%); }
+  to { transform:translateX(0); }
+}
+
+.hidden { display:none!important; }
+
+/* TABLE */
+table{ width:100%; text-align:left; }
+th,td{ padding:8px; border-bottom:1px solid #ffffff33; }
+
+/* AUTH */
+.auth-bg { display:flex; justify-content:center; align-items:center; height:100vh; }
+.auth-card {
+  background:#ffffff15;
+  padding:25px; border-radius:12px; width:320px;
+  box-shadow:0 0 12px #0006;
+}
+
+/* EXPERTS */
+.experts-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px;
+}
+.expert-card{
+  padding:14px; background:#ffffff12; border-radius:12px;
+  box-shadow:0 0 6px #0004;
+}
+/* ADMIN TABLE DARK GLASS NEOMORPHISM */
+.admin table {
+  background:#ffffff05;
+  backdrop-filter:blur(18px);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 0 18px #00ff8844;
+}
+
+.admin th {
+  background:#2e7d32aa;
+  color:white;
+  padding:12px;
+}
+
+.admin td {
+  padding:12px;
+  border-bottom:1px solid #ffffff22;
+}
+
+.admin tr:hover {
+  background:#00ff8866;
+  transition:0.25s;
+  color:#000;
+}

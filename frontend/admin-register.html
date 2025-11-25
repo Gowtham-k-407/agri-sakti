@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Registration</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<div class="auth-container">
+  <h2>Admin Registration</h2>
+
+  <input id="adminPhone" placeholder="Phone Number" />
+  <button id="sendOtpBtn" class="btn accent">Send Verification Code</button>
+  <p id="otpStatus"></p>
+
+  <input id="otpInput" placeholder="Enter OTP" class="hidden" />
+  <button id="verifyOtpBtn" class="btn accent hidden">Verify OTP</button>
+
+  <form id="adminRegisterForm" class="hidden">
+    <input id="adminName" placeholder="Name" required />
+    <input id="adminPassword" placeholder="Password" type="password" required />
+    <button type="submit" class="btn accent">Create Admin</button>
+    <p id="adminMsg"></p>
+  </form>
+</div>
+
+<script>
+const API_BASE = "http://localhost:3000/api";
+
+// SEND OTP
+document.getElementById("sendOtpBtn").addEventListener("click", async () => {
+  const phone = document.getElementById("adminPhone").value.trim();
+  const msg = document.getElementById("otpStatus");
+
+  const res = await fetch(`${API_BASE}/auth/send-admin-otp`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ phone })
+  });
+
+  const data = await res.json();
+  msg.innerText = data.message + " OTP: " + data.otp; // shows OTP for dev
+
+  document.getElementById("otpInput").classList.remove("hidden");
+  document.getElementById("verifyOtpBtn").classList.remove("hidden");
+});
+
+// VERIFY OTP
+document.getElementById("verifyOtpBtn").addEventListener("click", async () => {
+  const phone = document.getElementById("adminPhone").value.trim();
+  const otp = document.getElementById("otpInput").value.trim();
+
+  const res = await fetch(`${API_BASE}/auth/verify-admin-otp`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ phone, otp })
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) return alert(data.message);
+
+  document.getElementById("adminRegisterForm").classList.remove("hidden");
+});
+
+// ADMIN CREATE
+document.getElementById("adminRegisterForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const payload = {
+    name: document.getElementById("adminName").value.trim(),
+    phone: document.getElementById("adminPhone").value.trim(),
+    password: document.getElementById("adminPassword").value.trim()
+  };
+
+  const res = await fetch(`${API_BASE}/auth/admin-register`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(payload),
+  });
+
+  const data = await res.json();
+  if (!res.ok) return alert(data.message);
+
+  alert("Admin Registered Successfully!");
+  window.location.href = "login.html";
+});
+</script>
+
+</body>
+</html>

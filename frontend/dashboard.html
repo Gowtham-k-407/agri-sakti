@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — Agri-Sakthi</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+
+<body class="page-bg">
+
+<header class="topbar">
+  <h2>🌾 Agri-Sakthi Dashboard</h2>
+  <div>
+    <span id="headerPhone"></span> |
+    <span id="headerRole"></span>
+    <button id="logoutBtn" class="btn small danger">Logout</button>
+  </div>
+</header>
+
+<!-- Profile -->
+<section class="card">
+  <h3>Your Profile</h3>
+  <p><b>Name:</b> <span id="profileName"></span></p>
+  <p><b>Phone:</p><b> <span id="profilePhone"></span></b></p>
+  <p><b>Role:</b> <span id="profileRole"></span></p>
+</section>
+
+<!-- Marketplace -->
+<section class="card">
+  <h3>Marketplace</h3>
+  <p><b>Open Listings:</b> <span id="openListingsCount">0</span></p>
+  <table>
+    <thead>
+      <tr><th>Farmer</th><th>Crop</th><th>Qty</th><th>Price</th><th>Status</th><th></th></tr>
+    </thead>
+    <tbody id="listingsBody"></tbody>
+  </table>
+</section>
+
+<!-- Create Listing -->
+<section id="farmerListingSection" class="card">
+  <h3>Create Listing (Farmer Only)</h3>
+  <form id="listingForm">
+    <input name="crop_name" placeholder="Crop Name" required/>
+    <input name="quantity_kg" placeholder="Quantity (kg)" required/>
+    <input name="price_per_kg" placeholder="Price per kg" required/>
+    <button class="btn">Create</button>
+  </form>
+</section>
+
+<!-- AI Tools -->
+<section class="card">
+  <h3>AI Crop Recommendation</h3>
+  <form id="aiCropForm">
+    <input name="ph" placeholder="Soil pH (e.g. 6.5)" required/>
+    <button class="btn accent">Recommend</button>
+  </form>
+  <p id="aiCropResult"></p>
+</section>
+
+<!-- Experts -->
+<section class="card">
+  <h3>Experts</h3>
+  <div id="expertsList" class="experts-grid"></div>
+</section>
+
+<!-- === BUY MODAL SLIDE OVER === -->
+<div id="buyModal" class="modal hidden">
+  <div class="modal-content">
+    <h3>Enter purchase quantity</h3>
+    <input id="buyQty" type="number" min="1"/>
+    <button id="confirmBuyBtn" class="btn accent">Confirm Purchase</button>
+    <button onclick="closeBuyModal()" class="btn small danger">Cancel</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
