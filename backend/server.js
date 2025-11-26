@@ -17,7 +17,7 @@ app.use(
     origin: [
       "http://localhost:5500",
       "http://localhost:3000",
-      "https://<your-vercel-domain>.vercel.app"
+      "https://agri-sakti-nv48.vercel.app"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
