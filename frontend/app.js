@@ -1,5 +1,5 @@
 // ================== GLOBAL CONFIG ==================
-const API_BASE = "https://agri-sakti-portal.onrender.com";
+const API_BASE = "https://agri-sakti-1.onrender.com";
 let currentBuyListingId = null;
 let state = { listings: [] };
 
