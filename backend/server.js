@@ -12,11 +12,18 @@ const adminRoutes = require("./routes/admin");
 
 const app = express();
 
-app.use(cors({
-  origin: "http://localhost:5500",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5500",
+      "http://localhost:3000",
+      "https://<your-vercel-domain>.vercel.app"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 
 app.use(express.json());
 
